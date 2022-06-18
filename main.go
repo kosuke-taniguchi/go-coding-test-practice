@@ -1775,10 +1775,6 @@ func isHappy(n int) bool {
 		return true
 	}
 
-	if math.Pow(float64(n), 2) < 10 {
-		return false
-	}
-
 	history := make(map[int]struct{}, 0)
 
 	for {
@@ -1805,15 +1801,10 @@ func sumSqrDigits(n int, history map[int]struct{}) (int, map[int]struct{}) {
 		history[n] = struct{}{}
 	}
 
-	nList := make([]int, 0)
-	for n > 0 {
-		nList = append([]int{n % 10}, nList...)
-		n /= 10
-	}
-
 	var result int
-	for _, n := range nList {
-		result += int(math.Pow(float64(n), 2))
+	for n > 0 {
+		result += int(math.Pow(float64(n%10), 2))
+		n /= 10
 	}
 
 	return result, history
