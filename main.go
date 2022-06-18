@@ -1844,6 +1844,25 @@ func strToInt(strs string) []int {
 	return result
 }
 
+func reverseList(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+
+	currentNode := head
+	var prevNode *ListNode
+	for currentNode.Next != nil {
+		nextNode := currentNode.Next
+		currentNode.Next = prevNode
+		prevNode = currentNode
+		currentNode = nextNode
+	}
+
+	currentNode.Next = prevNode
+
+	return currentNode
+}
+
 func main() {
 	//numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
 	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
