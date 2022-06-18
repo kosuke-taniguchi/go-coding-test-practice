@@ -1876,12 +1876,27 @@ func containsDuplicate(nums []int) bool {
 	return false
 }
 
+func containsNearbyDuplicate(nums []int, k int) bool {
+	for i := 0; i < len(nums)-1; i++ {
+		for j := i + 1; j < i+k+1; j++ {
+			if j >= len(nums) {
+				continue
+			}
+			if nums[i] == nums[j] {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 func main() {
-	//numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
-	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9}
 	//fmt.Println(numbers)
 
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
 	//fmt.Println(isHappy(4))
-	fmt.Println(isIsomorphic("add", "bae"))
+	//fmt.Println(isIsomorphic("add", "bae"))
+	fmt.Println(containsNearbyDuplicate(numbers, 3))
 }
