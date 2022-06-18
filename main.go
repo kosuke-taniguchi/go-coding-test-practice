@@ -1891,6 +1891,18 @@ func containsNearbyDuplicate(nums []int, k int) bool {
 	return false
 }
 
+func containsNearbyDuplicateV2(nums []int, k int) bool {
+	contained := make(map[int]int, 0)
+	for i, num := range nums {
+		if n, ok := contained[num]; ok && i-n <= k {
+			return true
+		}
+		contained[num] = i
+	}
+
+	return false
+}
+
 func main() {
 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9}
 	//fmt.Println(numbers)
