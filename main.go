@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"reflect"
 	"strconv"
 	"strings"
 )
@@ -1812,10 +1811,20 @@ func sumSqrDigits(n int, history map[int]struct{}) (int, map[int]struct{}) {
 }
 
 func isIsomorphic(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
 	sResult := strToInt(s)
 	tResult := strToInt(t)
 
-	return reflect.DeepEqual(sResult, tResult)
+	for i := 0; i < len(s); i++ {
+		if sResult[i] != tResult[i] {
+			return false
+		}
+	}
+
+	return true
 }
 
 func strToInt(strs string) []int {
