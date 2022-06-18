@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strconv"
 	"strings"
 )
@@ -1810,11 +1811,36 @@ func sumSqrDigits(n int, history map[int]struct{}) (int, map[int]struct{}) {
 	return result, history
 }
 
+func isIsomorphic(s string, t string) bool {
+	sResult := strToInt(s)
+	tResult := strToInt(t)
+
+	return reflect.DeepEqual(sResult, tResult)
+}
+
+func strToInt(strs string) []int {
+	var idx int
+	strsMap := make(map[string]int, 0)
+	newStrs := strings.Split(strs, "")
+	result := make([]int, 0)
+	for _, str := range newStrs {
+		if _, ok := strsMap[str]; !ok {
+			strsMap[str] = idx
+			idx++
+		}
+
+		result = append(result, strsMap[str])
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
 	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
 	//fmt.Println(numbers)
 
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
-	fmt.Println(isHappy(4))
+	//fmt.Println(isHappy(4))
+	fmt.Println(isIsomorphic("add", "bae"))
 }
