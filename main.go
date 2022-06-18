@@ -1863,6 +1863,19 @@ func reverseList(head *ListNode) *ListNode {
 	return currentNode
 }
 
+func containsDuplicate(nums []int) bool {
+	countMap := make(map[int]struct{}, 0)
+	for _, num := range nums {
+		if _, ok := countMap[num]; ok {
+			return true
+		} else {
+			countMap[num] = struct{}{}
+		}
+	}
+
+	return false
+}
+
 func main() {
 	//numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
 	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
