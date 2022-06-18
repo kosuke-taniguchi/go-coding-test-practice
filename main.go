@@ -1770,10 +1770,60 @@ func majorityElementV2(nums []int) int {
 	return -1
 }
 
-func main() {
-	numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
-	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
-	fmt.Println(numbers)
+func isHappy(n int) bool {
+	if n == 1 {
+		return true
+	}
 
-	fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
+	if math.Pow(float64(n), 2) < 10 {
+		return false
+	}
+
+	history := make(map[int]struct{}, 0)
+
+	for {
+		n, history = sumSqrDigits(n, history)
+		if n == 1 {
+			return true
+		}
+		if n == -1 {
+			return false
+		}
+	}
+
+	return false
+}
+
+func sumSqrDigits(n int, history map[int]struct{}) (int, map[int]struct{}) {
+	if n%10 == 0 && n/10 == 0 {
+		return 1, history
+	}
+
+	if _, ok := history[n]; ok {
+		return -1, history
+	} else {
+		history[n] = struct{}{}
+	}
+
+	nList := make([]int, 0)
+	for n > 0 {
+		nList = append([]int{n % 10}, nList...)
+		n /= 10
+	}
+
+	var result int
+	for _, n := range nList {
+		result += int(math.Pow(float64(n), 2))
+	}
+
+	return result, history
+}
+
+func main() {
+	//numbers := []int{3, 2, 34, 6, 8, 45, 23, 34, 6, 20, 45, 5, 6, 7}
+	//[2 3 5 6 6 6 7 8 20 23 34 34 45 45]
+	//fmt.Println(numbers)
+
+	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
+	fmt.Println(isHappy(4))
 }
