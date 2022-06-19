@@ -1940,12 +1940,49 @@ func invertTreeV3(root *TreeNode) *TreeNode {
 	return root
 }
 
+func summaryRanges(nums []int) []string {
+	var result []string
+	if len(nums) == 0 {
+		return result
+	}
+
+	var startTmp int
+	var tmp int
+	for i, num := range nums {
+		if i == 0 {
+			startTmp = num
+			tmp = num
+			continue
+		}
+
+		if tmp+1 == num {
+			tmp = num
+		} else {
+			if startTmp == tmp {
+				result = append(result, fmt.Sprintf("%d", startTmp))
+			} else {
+				result = append(result, fmt.Sprintf("%d->%d", startTmp, tmp))
+			}
+			startTmp = num
+			tmp = num
+		}
+	}
+
+	if startTmp == tmp {
+		result = append(result, fmt.Sprintf("%d", startTmp))
+	} else {
+		result = append(result, fmt.Sprintf("%d->%d", startTmp, tmp))
+	}
+
+	return result
+}
+
 func main() {
-	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9}
+	numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
 
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
 	//fmt.Println(isHappy(4))
 	//fmt.Println(isIsomorphic("add", "bae"))
-	fmt.Println(containsNearbyDuplicate(numbers, 3))
+	fmt.Println(summaryRanges(numbers))
 }
