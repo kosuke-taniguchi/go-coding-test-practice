@@ -1977,6 +1977,7 @@ func summaryRanges(nums []int) []string {
 	return result
 }
 
+// 2進数に変換して1の個数で判定
 func isPowerOfTwo(n int) bool {
 	nBinary := strings.Split(strconv.FormatInt(int64(n), n), "")
 	binList := make([]int, len(nBinary))
@@ -1995,6 +1996,21 @@ func isPowerOfTwo(n int) bool {
 	return count == 1
 }
 
+func isPowerOfTwoV2(n int) bool {
+	if n == 0 {
+		return false
+	}
+
+	var num float64
+	var i int
+	for num < float64(n) {
+		num = math.Pow(2, float64(i))
+		i++
+	}
+
+	return int(num) == n
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2002,5 +2018,6 @@ func main() {
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
 	//fmt.Println(isHappy(4))
 	//fmt.Println(isIsomorphic("add", "bae"))
-	fmt.Println(isPowerOfTwo(15))
+	//fmt.Println(isPowerOfTwo(15))
+	fmt.Println(isPowerOfTwoV2(16))
 }
