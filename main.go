@@ -2083,6 +2083,19 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	}
 }
 
+func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	sStrs := strings.Split(s, "")
+	for _, sStr := range sStrs {
+		t = strings.Replace(t, sStr, "", 1)
+	}
+
+	return t == ""
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2091,5 +2104,6 @@ func main() {
 	//fmt.Println(isHappy(4))
 	//fmt.Println(isIsomorphic("add", "bae"))
 	//fmt.Println(isPowerOfTwo(15))
-	fmt.Println(isPowerOfTwoV2(16))
+	//fmt.Println(isPowerOfTwoV2(16))
+	fmt.Println(isAnagram("anagram", "naga"))
 }
