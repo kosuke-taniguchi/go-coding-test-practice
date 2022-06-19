@@ -2096,6 +2096,32 @@ func isAnagram(s string, t string) bool {
 	return t == ""
 }
 
+// faster than v1
+func isAnagramV2(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	sMap := make(map[int32]int, 0)
+	tMap := make(map[int32]int, 0)
+
+	for _, sStr := range s {
+		sMap[sStr]++
+	}
+
+	for _, tStr := range t {
+		tMap[tStr]++
+	}
+
+	for k, _ := range sMap {
+		if sMap[k] != tMap[k] {
+			return false
+		}
+	}
+
+	return true
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
