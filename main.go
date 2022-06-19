@@ -2129,7 +2129,6 @@ func binaryTreePaths(root *TreeNode) []string {
 }
 
 func binaryTreePathsHelper(root *TreeNode, path string, result *[]string) {
-
 	if root.Right == nil && root.Left == nil {
 		*result = append(*result, path)
 		return
@@ -2146,6 +2145,25 @@ func binaryTreePathsHelper(root *TreeNode, path string, result *[]string) {
 	}
 }
 
+func addDigits(num int) int {
+	result := addDigitsHelper(num)
+	for result/10 != 0 {
+		result = addDigitsHelper(result)
+	}
+
+	return result
+}
+
+func addDigitsHelper(tmp int) int {
+	var result int
+	for tmp >= 1 {
+		result += tmp % 10
+		tmp /= 10
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2155,5 +2173,5 @@ func main() {
 	//fmt.Println(isIsomorphic("add", "bae"))
 	//fmt.Println(isPowerOfTwo(15))
 	//fmt.Println(isPowerOfTwoV2(16))
-	fmt.Println(isAnagram("anagram", "naga"))
+	fmt.Println(addDigits(38))
 }
