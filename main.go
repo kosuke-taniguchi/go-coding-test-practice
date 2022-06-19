@@ -1916,6 +1916,15 @@ func invertTree(root *TreeNode) *TreeNode {
 	return root
 }
 
+func invertTreeV2(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	root.Left, root.Right = invertTreeV2(root.Right), invertTreeV2(root.Left)
+	return root
+}
+
 func main() {
 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9}
 	//fmt.Println(numbers)
