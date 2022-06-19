@@ -2164,6 +2164,19 @@ func addDigitsHelper(tmp int) int {
 	return result
 }
 
+func addDigitsV2(num int) int {
+	for num/10 > 0 {
+		var sum int
+		for num >= 1 {
+			sum += num % 10
+			num /= 10
+		}
+		num = sum
+	}
+
+	return num
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
