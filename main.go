@@ -2011,6 +2011,64 @@ func isPowerOfTwoV2(n int) bool {
 	return int(num) == n
 }
 
+// not correct
+func isPalindromeListNode(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+
+	// count length linked list
+	var lenNode int
+	currentNode := head
+	for currentNode != nil {
+		lenNode++
+		currentNode = currentNode.Next
+	}
+
+	currentNode = head
+
+	lenHalf := lenNode / 2
+	stackList := make([]int, 0, lenHalf)
+	for i := 0; i < lenHalf; i++ {
+		stackList = append([]int{currentNode.Val}, stackList...)
+		currentNode = currentNode.Next
+	}
+
+	if lenNode%2 != 0 {
+		currentNode = currentNode.Next
+	}
+
+	for _, val := range stackList {
+		if val != currentNode.Val {
+			return false
+		}
+		currentNode = currentNode.Next
+	}
+
+	return true
+}
+
+func isPalindromeListNodeV2(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+
+	currentNode := head
+	valList := make([]int, 0)
+	for currentNode != nil {
+		valList = append(valList, currentNode.Val)
+		currentNode = currentNode.Next
+	}
+
+	for i := 0; i < len(valList)/2; i++ {
+		if valList[i] != valList[len(valList)-i-1] {
+			return false
+		}
+	}
+
+	return true
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
