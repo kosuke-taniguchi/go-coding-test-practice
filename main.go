@@ -2122,6 +2122,30 @@ func isAnagramV2(s string, t string) bool {
 	return true
 }
 
+func binaryTreePaths(root *TreeNode) []string {
+	result := make([]string, 0)
+	binaryTreePathsHelper(root, fmt.Sprintf("%d", root.Val), &result)
+	return result
+}
+
+func binaryTreePathsHelper(root *TreeNode, path string, result *[]string) {
+
+	if root.Right == nil && root.Left == nil {
+		*result = append(*result, path)
+		return
+	}
+
+	if root.Left != nil {
+		leftPath := path + fmt.Sprintf("->%d", root.Left.Val)
+		binaryTreePathsHelper(root.Left, leftPath, result)
+	}
+
+	if root.Right != nil {
+		rightPath := path + fmt.Sprintf("->%d", root.Right.Val)
+		binaryTreePathsHelper(root.Right, rightPath, result)
+	}
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
