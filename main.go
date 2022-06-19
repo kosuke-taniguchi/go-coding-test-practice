@@ -1977,12 +1977,30 @@ func summaryRanges(nums []int) []string {
 	return result
 }
 
+func isPowerOfTwo(n int) bool {
+	nBinary := strings.Split(strconv.FormatInt(int64(n), n), "")
+	binList := make([]int, len(nBinary))
+	for _, num := range nBinary {
+		numInt, _ := strconv.Atoi(num)
+		binList = append(binList, numInt)
+	}
+
+	var count int
+	for _, bin := range binList {
+		if bin == 1 {
+			count++
+		}
+	}
+
+	return count == 1
+}
+
 func main() {
-	numbers := []int{0, 2, 3, 4, 6, 8, 9}
+	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
 
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
 	//fmt.Println(isHappy(4))
 	//fmt.Println(isIsomorphic("add", "bae"))
-	fmt.Println(summaryRanges(numbers))
+	fmt.Println(isPowerOfTwo(15))
 }
