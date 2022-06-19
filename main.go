@@ -1903,6 +1903,19 @@ func containsNearbyDuplicateV2(nums []int, k int) bool {
 	return false
 }
 
+func invertTree(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	// 考え方はあってるけど下記だと、root.Leftが上書きされて、
+	// root.Rightにも上書きされたroot.Left(もとはroot.Right)が入ってきちゃう
+	root.Left = invertTree(root.Right)
+	root.Right = invertTree(root.Left)
+
+	return root
+}
+
 func main() {
 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9}
 	//fmt.Println(numbers)
