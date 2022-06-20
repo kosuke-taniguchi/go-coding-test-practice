@@ -2238,6 +2238,25 @@ func isUglyV3(n int) bool {
 	return true
 }
 
+func missingNumber(nums []int) int {
+	for i := 0; i <= len(nums); i++ {
+		if !isInMissingNumber(i, nums) {
+			return i
+		}
+	}
+
+	return -1
+}
+
+func isInMissingNumber(n int, nums []int) bool {
+	for _, num := range nums {
+		if num == n {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
