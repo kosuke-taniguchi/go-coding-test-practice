@@ -2257,6 +2257,31 @@ func isInMissingNumber(n int, nums []int) bool {
 	return false
 }
 
+func missingNumberV2(nums []int) int {
+	var sum int
+	for i := 0; i <= len(nums); i++ {
+		sum += i
+	}
+
+	var numSum int
+	for _, num := range nums {
+		numSum += num
+	}
+
+	return sum - numSum
+}
+
+func missingNumberV3(nums []int) int {
+	var sum int
+	var sumNums int
+	for i, num := range nums {
+		sumNums += num
+		sum += i + 1
+	}
+
+	return sum - sumNums
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
