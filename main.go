@@ -2177,6 +2177,47 @@ func addDigitsV2(num int) int {
 	return num
 }
 
+// not correct
+func isUgly(n int) bool {
+	if n == 1 {
+		return true
+	}
+
+	if n <= 0 {
+		return false
+	}
+
+	for i := 2; i <= n/2; i++ {
+		if n%i == 0 {
+			if !isUglyHelper(i) {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+func isUglyHelper(n int) bool {
+	nums := []int{2, 3, 5}
+	for _, num := range nums {
+		if num == n {
+			return true
+		}
+	}
+	return false
+}
+
+func isUglyV2(n int) bool {
+	primeFactors := []int{2, 3, 5}
+	for _, pf := range primeFactors {
+		for n%pf == 0 {
+			n /= pf
+		}
+	}
+	return n == 1
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2186,5 +2227,6 @@ func main() {
 	//fmt.Println(isIsomorphic("add", "bae"))
 	//fmt.Println(isPowerOfTwo(15))
 	//fmt.Println(isPowerOfTwoV2(16))
-	fmt.Println(addDigits(38))
+	//fmt.Println(addDigits(38))
+	fmt.Println(isUglyV2(8))
 }
