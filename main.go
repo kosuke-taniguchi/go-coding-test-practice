@@ -2218,6 +2218,26 @@ func isUglyV2(n int) bool {
 	return n == 1
 }
 
+func isUglyV3(n int) bool {
+	if n == 0 {
+		return false
+	}
+
+	for n != 1 {
+		if n%2 == 0 {
+			n /= 2
+		} else if n%3 == 0 {
+			n /= 3
+		} else if n%5 == 0 {
+			n /= 5
+		} else {
+			return false
+		}
+	}
+
+	return true
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
