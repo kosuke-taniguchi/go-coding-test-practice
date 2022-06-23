@@ -2293,6 +2293,18 @@ func moveZeroes(nums []int) {
 	}
 }
 
+func moveZeroesV2(nums []int) {
+	var n int
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			nums[i], nums[n] = nums[n], nums[i]
+			n++
+		}
+	}
+
+	fmt.Println(nums)
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2303,6 +2315,7 @@ func main() {
 	//fmt.Println(isPowerOfTwo(15))
 	//fmt.Println(isPowerOfTwoV2(16))
 	//fmt.Println(addDigits(38))
-	fmt.Println(isUglyV2(8))
-	moveZeroes([]int{0, 1, 0, 3, 12})
+	//fmt.Println(isUglyV2(8))
+	//moveZeroes([]int{0, 1, 0, 3, 12})
+	moveZeroesV2([]int{0, 1, 0, 3, 12})
 }
