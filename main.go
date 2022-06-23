@@ -2282,6 +2282,17 @@ func missingNumberV3(nums []int) int {
 	return sum - sumNums
 }
 
+// incorrect
+func moveZeroes(nums []int) {
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i] == 0 {
+			for j := i; j < len(nums)-i-1; j++ {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+			}
+		}
+	}
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2293,4 +2304,5 @@ func main() {
 	//fmt.Println(isPowerOfTwoV2(16))
 	//fmt.Println(addDigits(38))
 	fmt.Println(isUglyV2(8))
+	moveZeroes([]int{0, 1, 0, 3, 12})
 }
