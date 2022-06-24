@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strconv"
 	"strings"
 )
@@ -2305,6 +2306,37 @@ func moveZeroesV2(nums []int) {
 	fmt.Println(nums)
 }
 
+// 少し冗長
+func wordPattern(pattern string, s string) bool {
+	sList := strings.Split(s, " ")
+	sMap := make(map[string]int, 0)
+	sIntList := make([]int, 0, len(sList))
+	var n int
+	for _, str := range sList {
+		_, ok := sMap[str]
+		if !ok {
+			sMap[str] = n
+			n++
+		}
+		sIntList = append(sIntList, sMap[str])
+	}
+
+	pList := strings.Split(pattern, "")
+	pMap := make(map[string]int, 0)
+	pIntList := make([]int, 0, len(pattern))
+	var m int
+	for _, str := range pList {
+		_, ok := pMap[str]
+		if !ok {
+			pMap[str] = m
+			m++
+		}
+		pIntList = append(pIntList, pMap[str])
+	}
+
+	return reflect.DeepEqual(sIntList, pIntList)
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2317,5 +2349,6 @@ func main() {
 	//fmt.Println(addDigits(38))
 	//fmt.Println(isUglyV2(8))
 	//moveZeroes([]int{0, 1, 0, 3, 12})
-	moveZeroesV2([]int{0, 1, 0, 3, 12})
+	//moveZeroesV2([]int{0, 1, 0, 3, 12})
+	fmt.Println(wordPattern("abba", "dog cat cat dog"))
 }
