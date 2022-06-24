@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"reflect"
 	"strconv"
 	"strings"
 )
@@ -2307,6 +2306,7 @@ func moveZeroesV2(nums []int) {
 }
 
 // 少し冗長
+// reflect.DeepEqual()はずるいかな
 func wordPattern(pattern string, s string) bool {
 	sList := strings.Split(s, " ")
 	sMap := make(map[string]int, 0)
@@ -2334,7 +2334,17 @@ func wordPattern(pattern string, s string) bool {
 		pIntList = append(pIntList, pMap[str])
 	}
 
-	return reflect.DeepEqual(sIntList, pIntList)
+	if len(sIntList) != len(pIntList) {
+		return false
+	}
+
+	for i := 0; i < len(sIntList); i++ {
+		if sIntList[i] != pIntList[i] {
+			return false
+		}
+	}
+
+	return true
 }
 
 func main() {
