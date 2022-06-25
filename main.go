@@ -2632,6 +2632,30 @@ func firstUniqCharV2(s string) int {
 	return -1
 }
 
+// Fail: s = "a" t = "aa"
+// incorrect
+func findTheDifference(s string, t string) byte {
+    result := []rune{}
+	for _, r := range t {
+		if !isInForFindTheDifference(r, s) {
+			result = append(result, r)
+		}
+	}
+
+	fmt.Println(result)
+	return byte(result[0])
+}
+
+func isInForFindTheDifference(target rune, list string) bool {
+	for _, l := range list {
+		if l == target {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2652,5 +2676,7 @@ func main() {
 	//fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
 	//fmt.Println(isPerfectSquare(16))
 	//fmt.Println(canConstruct("a", "b"))
-	fmt.Println(firstUniqChar("aabb"))
+	// fmt.Println(firstUniqChar("aabb"))
+	// fmt.Println([]rune("test"))
+	fmt.Println(findTheDifference("abcd", "abcde"))
 }
