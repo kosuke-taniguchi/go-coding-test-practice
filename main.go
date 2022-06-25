@@ -2507,6 +2507,27 @@ func intersect(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+// constraints: Do not use any built-in library function such as sqrt
+func isPerfectSquare(num int) bool {
+	if num == 0 {
+		return false
+	}
+
+	left, right := 0, num
+	for left <= right {
+		mid := (left + right) / 2
+		if mid*mid > num {
+			right = mid - 1
+		} else if mid*mid < num {
+			left = mid + 1
+		} else {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2524,5 +2545,6 @@ func main() {
 	//fmt.Println(countBits(5))
 	//fmt.Println(isPowerOfFour(20))
 	//fmt.Println(reverseVowels("leetcode"))
-	fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
+	//fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
+	fmt.Println(isPerfectSquare(16))
 }
