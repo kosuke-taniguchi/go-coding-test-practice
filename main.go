@@ -2616,6 +2616,22 @@ func firstUniqChar(s string) int {
 	return resultIndex
 }
 
+func firstUniqCharV2(s string) int {
+	strMap := make(map[string]int, 0)
+	for _, str := range s {
+		strMap[string(str)]++
+	}
+
+	for i := 0; i < len(s); i++ {
+		times, ok := strMap[string(s[i])]
+		if ok && times == 1 {
+			return i
+		}
+	}
+
+	return -1
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
