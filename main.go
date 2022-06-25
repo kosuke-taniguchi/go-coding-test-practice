@@ -2573,6 +2573,29 @@ func reverseStringForCanConstruct(str string) string {
 	return result
 }
 
+// 正解だけど、少し処理が遅い
+func canConstructV2(ransomNote string, magazine string) bool {
+	magazineStrMap := make(map[string]int, 0)
+	magazineSlice := strings.Split(magazine, "")
+	ransomNoteSlice := strings.Split(ransomNote, "")
+	for _, s := range magazineSlice {
+		magazineStrMap[s]++
+	}
+
+	for _, s := range ransomNoteSlice {
+		value, ok := magazineStrMap[s]
+		if !ok {
+			return false
+		}
+		if value == 0 {
+			return false
+		} else {
+			magazineStrMap[s]--
+		}
+	}
+	return true
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
