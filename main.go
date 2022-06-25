@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"reflect"
 	"strconv"
 	"strings"
 )
@@ -2596,6 +2595,27 @@ func canConstructV2(ransomNote string, magazine string) bool {
 	return true
 }
 
+// 後ろからみていく
+// incorrect
+// アイデアは良かったけど実装できず。。。
+func firstUniqChar(s string) int {
+	var resultIndex int
+	strMap := make(map[uint8]struct{}, 0)
+	for i := len(s) - 1; i >= 0; i-- {
+		_, ok := strMap[s[i]]
+		if !ok {
+			resultIndex = i
+			strMap[s[i]] = struct{}{}
+		} else {
+			if resultIndex == -1 {
+				resultIndex = -1
+			}
+		}
+	}
+
+	return resultIndex
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2616,7 +2636,5 @@ func main() {
 	//fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
 	//fmt.Println(isPerfectSquare(16))
 	//fmt.Println(canConstruct("a", "b"))
-	test := "teststring"
-	te := test[0:3]
-	fmt.Println(reflect.TypeOf(te))
+	fmt.Println(firstUniqChar("aabb"))
 }
