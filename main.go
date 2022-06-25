@@ -2635,7 +2635,7 @@ func firstUniqCharV2(s string) int {
 // Fail: s = "a" t = "aa"
 // incorrect
 func findTheDifference(s string, t string) byte {
-    result := []rune{}
+	result := []rune{}
 	for _, r := range t {
 		if !isInForFindTheDifference(r, s) {
 			result = append(result, r)
