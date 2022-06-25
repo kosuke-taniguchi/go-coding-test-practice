@@ -2347,6 +2347,21 @@ func wordPattern(pattern string, s string) bool {
 	return true
 }
 
+func isPowerOfThree(n int) bool {
+	if n == 0 {
+		return false
+	}
+
+	for n%3 == 0 {
+		n /= 3
+	}
+
+	if n == 1 {
+		return true
+	}
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2360,5 +2375,6 @@ func main() {
 	//fmt.Println(isUglyV2(8))
 	//moveZeroes([]int{0, 1, 0, 3, 12})
 	//moveZeroesV2([]int{0, 1, 0, 3, 12})
-	fmt.Println(wordPattern("abba", "dog cat cat dog"))
+	//fmt.Println(wordPattern("abba", "dog cat cat dog"))
+	fmt.Println(isPowerOfThree(33))
 }
