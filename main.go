@@ -2447,6 +2447,10 @@ func isInVowels(s string) bool {
 	return false
 }
 
+//func intersection(nums1 []int, nums2 []int) []int {
+//
+//}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
