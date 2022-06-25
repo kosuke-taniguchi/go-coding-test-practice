@@ -2528,6 +2528,27 @@ func isPerfectSquare(num int) bool {
 	return false
 }
 
+// LeetCodeで用意された関数。コンパイルエラー防ぐために定義
+func guess(n int) int {
+	return 0
+}
+
+func guessNumber(n int) int {
+	left, right := 0, n
+	for left <= right {
+		mid := (left + right) / 2
+		if guess(mid) == -1 {
+			right = mid - 1
+		} else if guess(mid) == 1 {
+			left = mid + 1
+		} else {
+			return mid
+		}
+	}
+
+	return -1
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
