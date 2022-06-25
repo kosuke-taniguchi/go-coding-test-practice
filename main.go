@@ -2362,6 +2362,23 @@ func isPowerOfThree(n int) bool {
 	return false
 }
 
+func countBits(n int) []int {
+	results := make([]int, 0, n+1)
+	for i := 0; i < n+1; i++ {
+		binIStr := strconv.FormatInt(int64(i), 2)
+		binIStrList := strings.Split(binIStr, "")
+		var count int
+		for _, b := range binIStrList {
+			if b == "1" {
+				count++
+			}
+		}
+		results = append(results, count)
+	}
+
+	return results
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2376,5 +2393,5 @@ func main() {
 	//moveZeroes([]int{0, 1, 0, 3, 12})
 	//moveZeroesV2([]int{0, 1, 0, 3, 12})
 	//fmt.Println(wordPattern("abba", "dog cat cat dog"))
-	fmt.Println(isPowerOfThree(33))
+	fmt.Println(countBits(5))
 }
