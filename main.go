@@ -2447,9 +2447,47 @@ func isInVowels(s string) bool {
 	return false
 }
 
-//func intersection(nums1 []int, nums2 []int) []int {
-//
-//}
+// 少し汚い
+func intersection(nums1 []int, nums2 []int) []int {
+	numMap := make(map[int]struct{}, 0)
+	for _, n := range nums1 {
+		_, ok := numMap[n]
+		if !ok {
+			numMap[n] = struct{}{}
+		}
+	}
+
+	result := make([]int, 0)
+	nums2Map := make(map[int]struct{}, 0)
+	for _, num := range nums2 {
+		_, ok := numMap[num]
+		_, ok2 := nums2Map[num]
+		if ok && !ok2 {
+			result = append(result, num)
+			nums2Map[num] = struct{}{}
+		}
+	}
+
+	return result
+}
+
+// やってること同じだけどこっちのほうが綺麗
+func intersectionV2(nums1 []int, nums2 []int) []int {
+	numMap := make(map[int]bool, 0)
+	for _, n := range nums1 {
+		numMap[n] = true
+	}
+
+	result := make([]int, 0)
+	for _, num := range nums2 {
+		if numMap[num] == true {
+			result = append(result, num)
+			numMap[num] = false
+		}
+	}
+
+	return result
+}
 
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
