@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strconv"
 	"strings"
 )
@@ -2549,6 +2550,29 @@ func guessNumber(n int) int {
 	return -1
 }
 
+// incorrect
+// 連続した値じゃなきゃいけないと思ってたら、そうじゃないらしい
+func canConstruct(ransomNote string, magazine string) bool {
+	lenRansomNote := len(ransomNote)
+	for i := 0; i < len(magazine)-lenRansomNote+1; i++ {
+		if ransomNote == magazine[i:i+lenRansomNote] {
+			return true
+		}
+		if reverseStringForCanConstruct(ransomNote) == magazine[i:i+lenRansomNote] {
+			return true
+		}
+	}
+	return false
+}
+
+func reverseStringForCanConstruct(str string) string {
+	var result string
+	for i := len(str) - 1; i >= 0; i-- {
+		result += string(str[i])
+	}
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2567,5 +2591,9 @@ func main() {
 	//fmt.Println(isPowerOfFour(20))
 	//fmt.Println(reverseVowels("leetcode"))
 	//fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
-	fmt.Println(isPerfectSquare(16))
+	//fmt.Println(isPerfectSquare(16))
+	//fmt.Println(canConstruct("a", "b"))
+	test := "teststring"
+	te := test[0:3]
+	fmt.Println(reflect.TypeOf(te))
 }
