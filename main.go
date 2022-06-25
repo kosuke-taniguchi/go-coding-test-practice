@@ -2489,6 +2489,24 @@ func intersectionV2(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+// leetCodeにpostした笑
+func intersect(nums1 []int, nums2 []int) []int {
+	numMap := make(map[int]int, 0)
+	for _, num := range nums1 {
+		numMap[num]++
+	}
+
+	result := make([]int, 0)
+	for _, num := range nums2 {
+		if numMap[num] != 0 {
+			result = append(result, num)
+			numMap[num]--
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2505,5 +2523,6 @@ func main() {
 	//fmt.Println(wordPattern("abba", "dog cat cat dog"))
 	//fmt.Println(countBits(5))
 	//fmt.Println(isPowerOfFour(20))
-	fmt.Println(reverseVowels("leetcode"))
+	//fmt.Println(reverseVowels("leetcode"))
+	fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
 }
