@@ -2362,6 +2362,7 @@ func isPowerOfThree(n int) bool {
 	return false
 }
 
+// もっと良い方法ある
 func countBits(n int) []int {
 	results := make([]int, 0, n+1)
 	for i := 0; i < n+1; i++ {
@@ -2379,6 +2380,73 @@ func countBits(n int) []int {
 	return results
 }
 
+func isPowerOfFour(n int) bool {
+	if n == 0 {
+		return false
+	}
+
+	for n%4 == 0 {
+		n /= 4
+	}
+
+	if n != 1 {
+		return false
+	}
+
+	return true
+}
+
+// easy solution
+func reverseString(s []byte) {
+	result := make([]byte, 0, len(s))
+	for i := len(s) - 1; i >= 0; i-- {
+		result = append(result, s[i])
+	}
+	fmt.Println(result)
+}
+
+// correct answer
+func reverseStringV2(s []byte) {
+	for i := 0; i < len(s)/2; i++ {
+		s[i], s[len(s)-1-i] = s[len(s)-1-i], s[i]
+	}
+
+	fmt.Println(s)
+}
+
+func reverseVowels(s string) string {
+	sSlice := strings.Split(s, "")
+	var i int
+	j := len(sSlice) - 1
+	for i < j {
+		if isInVowels(sSlice[i]) && isInVowels(sSlice[j]) {
+			sSlice[i], sSlice[j] = sSlice[j], sSlice[i]
+			i++
+			j--
+			continue
+		}
+		if !isInVowels(sSlice[i]) {
+			i++
+		}
+		if !isInVowels(sSlice[j]) {
+			j--
+		}
+	}
+
+	return strings.Join(sSlice, "")
+}
+
+func isInVowels(s string) bool {
+	vowels := []string{"a", "i", "u", "e", "o", "A", "I", "U", "E", "O"}
+	for _, v := range vowels {
+		if v == s {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2393,5 +2461,7 @@ func main() {
 	//moveZeroes([]int{0, 1, 0, 3, 12})
 	//moveZeroesV2([]int{0, 1, 0, 3, 12})
 	//fmt.Println(wordPattern("abba", "dog cat cat dog"))
-	fmt.Println(countBits(5))
+	//fmt.Println(countBits(5))
+	//fmt.Println(isPowerOfFour(20))
+	fmt.Println(reverseVowels("leetcode"))
 }
