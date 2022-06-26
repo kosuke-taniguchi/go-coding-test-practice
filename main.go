@@ -2762,6 +2762,30 @@ func helperSumOfLeftLeaves(result *int, root *TreeNode, isLeft bool) {
 	helperSumOfLeftLeaves(result, root.Right, false)
 }
 
+func isValid(s string) bool {
+	strList := strings.Split(s, "")
+	pStack := make([]string, 0)
+	pMap := map[string]string{
+		")": "(",
+		"]": "[",
+		"}": "{",
+	}
+
+	for _, str := range strList {
+		if str == "(" || str == "[" || str == "{" {
+			pStack = append(pStack, str)
+		} else {
+			if len(pStack) == 0 || pStack[len(pStack)-1] != pMap[str] {
+				return false
+			} else {
+				pStack = pStack[:len(pStack)-1]
+			}
+		}
+	}
+
+	return len(pStack) == 0
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
