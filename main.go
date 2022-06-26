@@ -2743,6 +2743,25 @@ func isSubsequenceV2(s string, t string) bool {
 	return false
 }
 
+func sumOfLeftLeaves(root *TreeNode) int {
+	var result int
+	helperSumOfLeftLeaves(&result, root, false)
+	return result
+}
+
+func helperSumOfLeftLeaves(result *int, root *TreeNode, isLeft bool) {
+	if root == nil {
+		return
+	}
+
+	if isLeft && root.Left == nil && root.Right == nil {
+		*result += root.Val
+	}
+
+	helperSumOfLeftLeaves(result, root.Left, true)
+	helperSumOfLeftLeaves(result, root.Right, false)
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
