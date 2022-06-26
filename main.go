@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"math"
 	"strconv"
@@ -2654,6 +2655,49 @@ func isInForFindTheDifference(target rune, list string) bool {
 	}
 
 	return false
+}
+
+func findTheDifferenceV2(s string, t string) byte {
+	tmpMap := make(map[byte]int, 0)
+	sList := []byte(s)
+	tList := []byte(t)
+
+	for _, str := range tList {
+		tmpMap[str]++
+	}
+
+	for _, str := range sList {
+		tmpMap[str]--
+	}
+
+	for k, v := range tmpMap {
+		if v != 0 {
+			return k
+		}
+	}
+	return 0
+}
+
+func findTheDifferenceV3(s string, t string) byte {
+	tmpMap := make(map[byte]int, 0)
+	sList := []byte(s)
+	tList := []byte(t)
+
+	for i := 0; i < len(t); i++ {
+		if i != len(t) - 1 {
+			tmpMap[sList[i]]++
+			tmpMap[tList[i]]--
+		} else {
+			tmpMap[tList[i]]--
+		}
+	}
+
+	for k, v := range tmpMap {
+		if v != 0 {
+			return k
+		}
+	}
+	return 0
 }
 
 func main() {
