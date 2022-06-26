@@ -2724,6 +2724,25 @@ func isSubsequence(s string, t string) bool {
 	return result
 }
 
+func isSubsequenceV2(s string, t string) bool {
+	if s == "" {
+		return true
+	}
+
+	var index int
+	for i := 0; i < len(t); i++ {
+		if t[i] == s[index] {
+			index++
+		}
+		
+		if index == len(s) {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
