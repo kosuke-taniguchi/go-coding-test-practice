@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"math"
 	"strconv"
@@ -2700,6 +2699,31 @@ func findTheDifferenceV3(s string, t string) byte {
 	return 0
 }
 
+// ノーヒントでも結構できるようになってきた！
+func isSubsequence(s string, t string) bool {
+	if s == "" {
+		return true
+	}
+
+	sArr := strings.Split(s, "")
+	tArr := strings.Split(t, "")
+	var result bool
+	var i int
+	for _, el := range sArr {
+		result = false
+		for i < len(t) {
+			if tArr[i] == el {
+				result = true
+				i++
+				break
+			}
+			i++
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2722,5 +2746,4 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(findTheDifference("abcd", "abcde"))
 }
