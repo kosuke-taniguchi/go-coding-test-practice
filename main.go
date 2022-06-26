@@ -2683,7 +2683,7 @@ func findTheDifferenceV3(s string, t string) byte {
 	tList := []byte(t)
 
 	for i := 0; i < len(t); i++ {
-		if i != len(t) - 1 {
+		if i != len(t)-1 {
 			tmpMap[sList[i]]++
 			tmpMap[tList[i]]--
 		} else {
@@ -2734,7 +2734,7 @@ func isSubsequenceV2(s string, t string) bool {
 		if t[i] == s[index] {
 			index++
 		}
-		
+
 		if index == len(s) {
 			return true
 		}
@@ -2784,6 +2784,54 @@ func isValid(s string) bool {
 	}
 
 	return len(pStack) == 0
+}
+
+// LeetCode Level Medium
+// おそらく初Medium
+// 処理自体は合ってると思うけど、Goのint型の範囲を超えたら(?)うまく処理されない
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	// calc sum of l1
+	var sumL1 int
+	currentL1 := l1
+	digitL1 := 1
+	for currentL1 != nil {
+		sumL1 += currentL1.Val * digitL1
+		digitL1 *= 10
+		currentL1 = currentL1.Next
+	}
+
+	// calc sum of l2
+	var sumL2 int
+	currentL2 := l2
+	digitL2 := 1
+	for currentL2 != nil {
+		sumL2 += currentL2.Val * digitL2
+		digitL2 *= 10
+		currentL2 = currentL2.Next
+	}
+
+	// make list node
+	sum := sumL1 + sumL2
+	if sum == 0 {
+		return &ListNode{Val: 0}
+	}
+
+	var prevNode *ListNode
+	var root *ListNode
+	for sum > 0 {
+		newNode := &ListNode{
+			Val: sum % 10,
+		}
+		if prevNode == nil {
+			root = newNode
+		} else {
+			prevNode.Next = newNode
+		}
+		sum /= 10
+		prevNode = newNode
+	}
+
+	return root
 }
 
 func main() {
