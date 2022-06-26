@@ -2788,7 +2788,7 @@ func isValid(s string) bool {
 
 // LeetCode Level Medium
 // おそらく初Medium
-// 処理自体は合ってると思うけど、Goのint型の範囲を超えたら(?)うまく処理されない
+// 処理自体はあってるけどListNodeが大きくなったときに処理しきれない。非効率
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	// calc sum of l1
 	var sumL1 int
@@ -2834,6 +2834,35 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return root
 }
 
+// ListNodeの全てを参照するのではなく、
+func addTwoNumbersV2(l1 *ListNode, l2 *ListNode) *ListNode {
+	root := &ListNode{}
+	currentNode := root
+	var tmp int
+	for l1 != nil || l2 != nil {
+		sum := tmp
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
+		}
+
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
+
+		currentNode.Next = &ListNode{Val: sum%10}
+		currentNode = currentNode.Next
+		tmp = sum / 10
+	}
+
+	if tmp != 0 {
+		currentNode.Next = &ListNode{Val: tmp % 10}
+	}
+
+	return root.Next
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2856,4 +2885,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
+	fmt.Println(12/10)
 }
