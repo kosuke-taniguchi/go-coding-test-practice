@@ -2863,6 +2863,32 @@ func addTwoNumbersV2(l1 *ListNode, l2 *ListNode) *ListNode {
 	return root.Next
 }
 
+// incorrect "dvdf"のような場合に対応できてない
+func lengthOfLongestSubstring(s string) int {
+	var count int
+	var result int
+	tmpMap := make(map[byte]struct{}, 0)
+	for i := 0; i < len(s); i++ {
+		_, ok := tmpMap[s[i]]
+		if !ok {
+			count++
+		} else {
+			if count > result {
+				result = count
+			}
+			tmpMap = make(map[byte]struct{}, 0)
+			count = 1
+		}
+
+		if i == len(s) - 1 && count > result {
+			result = count
+		}
+		tmpMap[s[i]] = struct{}{}
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2885,5 +2911,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(12/10)
+	fmt.Println(lengthOfLongestSubstring("abcabcbb"))
 }
