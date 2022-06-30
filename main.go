@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -2851,7 +2852,7 @@ func addTwoNumbersV2(l1 *ListNode, l2 *ListNode) *ListNode {
 			l2 = l2.Next
 		}
 
-		currentNode.Next = &ListNode{Val: sum%10}
+		currentNode.Next = &ListNode{Val: sum % 10}
 		currentNode = currentNode.Next
 		tmp = sum / 10
 	}
@@ -2880,7 +2881,7 @@ func lengthOfLongestSubstring(s string) int {
 			count = 1
 		}
 
-		if i == len(s) - 1 && count > result {
+		if i == len(s)-1 && count > result {
 			result = count
 		}
 		tmpMap[s[i]] = struct{}{}
@@ -2890,7 +2891,7 @@ func lengthOfLongestSubstring(s string) int {
 }
 
 func longestPalindrome(s string) int {
-    strMap := make(map[rune]int, 0)
+	strMap := make(map[rune]int, 0)
 	for _, str := range s {
 		strMap[str]++
 	}
@@ -2898,7 +2899,7 @@ func longestPalindrome(s string) int {
 	var result int
 	var oddNum int
 	for _, v := range strMap {
-		if v % 2 == 0 {
+		if v%2 == 0 {
 			result += v
 		} else {
 			result += v - 1
@@ -2912,22 +2913,41 @@ func longestPalindrome(s string) int {
 func fizzBuzz(n int) []string {
 	result := make([]string, n, n)
 	for i := 0; i < n; i++ {
-		if (i+1) % 3 == 0 && (i+1) % 5 == 0 {
+		if (i+1)%3 == 0 && (i+1)%5 == 0 {
 			result[i] = "FizzBuzz"
-		} else if (i+1) % 3 == 0 {
+		} else if (i+1)%3 == 0 {
 			result[i] = "Fizz"
-		} else if (i+1) % 5 == 0 {
+		} else if (i+1)%5 == 0 {
 			result[i] = "Buzz"
 		} else {
-			result[i] = strconv.Itoa(i+1)
+			result[i] = strconv.Itoa(i + 1)
 		}
 	}
 
 	return result
 }
 
+func thirdMax(nums []int) int {
+	numsMap := make(map[int]struct{}, 0)
+	resultList := make([]int, 0)
+	for _, num := range nums {
+		if _, ok := numsMap[num]; ok {
+			continue
+		}
+		numsMap[num] = struct{}{}
+		resultList = append(resultList, num)
+	}
+
+	sort.Ints(resultList)
+
+	if len(resultList) < 3 {
+		return resultList[len(resultList)-1]
+	} else {
+		return resultList[len(resultList)-3]
+	}
+}
+
 func main() {
-	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
 
 	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
@@ -2948,6 +2968,4 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	// fmt.Println(lengthOfLongestSubstring("abcabcbb"))
-	fmt.Println(fizzBuzz(15))
 }
