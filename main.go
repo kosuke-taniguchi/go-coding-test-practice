@@ -2947,6 +2947,16 @@ func thirdMax(nums []int) int {
 	}
 }
 
+func arrangeCoins(n int) int {
+    count := n
+	i := 1
+	for count - i -1 > 0 {
+		count = count - i - 1
+		i++
+	}
+	return i
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -2968,4 +2978,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
+	fmt.Println(arrangeCoins(3))
 }
