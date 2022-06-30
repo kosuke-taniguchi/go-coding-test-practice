@@ -2957,6 +2957,24 @@ func arrangeCoins(n int) int {
 	return i
 }
 
+// これでも正解だが、効率が悪い
+func findDisappearedNumbers(nums []int) []int {
+	numsMap := make(map[int]struct{}, 0)
+	for _, num := range nums {
+		numsMap[num] = struct{}{}
+	}
+
+	result := make([]int, 0)
+	for i := 1; i <= len(nums); i++ {
+		_, ok := numsMap[i]
+		if !ok {
+			result = append(result, i)
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
