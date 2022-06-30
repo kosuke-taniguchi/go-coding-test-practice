@@ -2909,6 +2909,23 @@ func longestPalindrome(s string) int {
 	return result + oddNum
 }
 
+func fizzBuzz(n int) []string {
+	result := make([]string, n, n)
+	for i := 0; i < n; i++ {
+		if (i+1) % 3 == 0 && (i+1) % 5 == 0 {
+			result[i] = "FizzBuzz"
+		} else if (i+1) % 3 == 0 {
+			result[i] = "Fizz"
+		} else if (i+1) % 5 == 0 {
+			result[i] = "Buzz"
+		} else {
+			result[i] = strconv.Itoa(i+1)
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//numbers := []int{0, 2, 3, 4, 6, 8, 9}
 	//fmt.Println(numbers)
@@ -2932,5 +2949,5 @@ func main() {
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
 	// fmt.Println(lengthOfLongestSubstring("abcabcbb"))
-	fmt.Println(longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"))
+	fmt.Println(fizzBuzz(15))
 }
