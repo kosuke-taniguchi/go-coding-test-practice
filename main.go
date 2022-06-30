@@ -2957,7 +2957,7 @@ func arrangeCoins(n int) int {
 	return i
 }
 
-// これでも正解だが、効率が悪い
+// これでも正解だが、効率が悪い. mapでのインデックスアクセスはスライスの数十倍遅いらしい
 func findDisappearedNumbers(nums []int) []int {
 	numsMap := make(map[int]struct{}, 0)
 	for _, num := range nums {
@@ -2969,6 +2969,25 @@ func findDisappearedNumbers(nums []int) []int {
 		_, ok := numsMap[i]
 		if !ok {
 			result = append(result, i)
+		}
+	}
+
+	return result
+}
+
+// faster
+func findDisappearedNumbersV2(nums []int) []int {
+	numsList := make([]int, len(nums))
+	for _, num := range nums {
+		numsList[num-1] = num
+	}
+
+	fmt.Println(numsList)
+
+	result := make([]int, 0)
+	for i := 0; i < len(numsList); i++ {
+		if numsList[i] == 0 {
+			result = append(result, i+1)
 		}
 	}
 
@@ -2996,5 +3015,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(arrangeCoins(3))
+	fmt.Println(findDisappearedNumbersV2([]int{4,3,2,7,8,2,3,1}))
 }
