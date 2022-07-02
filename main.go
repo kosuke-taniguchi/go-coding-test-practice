@@ -3011,6 +3011,55 @@ func findContentChildren(g []int, s []int) int {
 	return result
 }
 
+// これめっちゃ考えたけどわからなかった
+func repeatedSubstringPattern(s string) bool {
+    next := getNext(s)
+    n := next[len(s)]
+    m := len(s) - n
+    if n >= m && len(s) % m == 0 {
+        return true
+    }
+    return false
+}
+
+func getNext(s string) []int {
+    res := make([]int, len(s) + 1)
+    
+    i := 0
+    j := -1
+    res[0] = -1
+    
+    for i < len(s) {
+        if j == -1 || s[i] == s[j] {
+            i++
+            j++
+            res[i] = j
+        } else {
+            j = res[j]
+        }
+    }
+    return res
+}
+
+func islandPerimeter(grid [][]int) int {
+    var result int
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			if grid[i][j] == 1 {
+				result += 4
+				if i > 0 && grid[i-1][j] == 1 {
+					result -= 2
+				}
+				if j > 0 && grid[i][j-1] == 1 {
+					result -=2
+				}
+			}
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3032,5 +3081,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(findContentChildren([]int{7, 8, 9, 10}, []int{5, 6, 7, 8}))
+	fmt.Println(repeatedSubstringPattern("abaabaa"))
 }
