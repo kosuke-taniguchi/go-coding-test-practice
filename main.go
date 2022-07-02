@@ -3060,6 +3060,27 @@ func islandPerimeter(grid [][]int) int {
 	return result
 }
 
+func findMaxConsecutiveOnes(nums []int) int {
+	var max int
+    var count int
+	for _, num := range nums {
+		if num == 1 {
+			count++
+		} else {
+			if count > max {
+				max = count
+			}
+			count = 0
+		}
+	}
+
+	if count > max {
+		max = count
+	}
+
+	return max
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3081,5 +3102,6 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(repeatedSubstringPattern("abaabaa"))
+	// fmt.Println(repeatedSubstringPattern("abaabaa"))
+	fmt.Println(findMaxConsecutiveOnes([]int{1, 0, 1, 1, 1, 0, 1}))
 }
