@@ -3081,6 +3081,26 @@ func findMaxConsecutiveOnes(nums []int) int {
 	return max
 }
 
+// めっちゃ効率悪い
+func constructRectangle(area int) []int {
+	result := []int{area, 1}
+	for i := 1; i < area; i++ {
+		if area % i != 0 {
+			continue
+		}
+
+		devided := area / i
+		if devided < i {
+			continue
+		}
+
+		result[0] = devided
+		result[1] = i
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3103,5 +3123,5 @@ func main() {
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
 	// fmt.Println(repeatedSubstringPattern("abaabaa"))
-	fmt.Println(findMaxConsecutiveOnes([]int{1, 0, 1, 1, 1, 0, 1}))
+	fmt.Println(constructRectangle(122122))
 }
