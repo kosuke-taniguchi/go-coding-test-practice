@@ -2982,12 +2982,29 @@ func findDisappearedNumbersV2(nums []int) []int {
 		numsList[num-1] = num
 	}
 
-	fmt.Println(numsList)
-
 	result := make([]int, 0)
 	for i := 0; i < len(numsList); i++ {
 		if numsList[i] == 0 {
 			result = append(result, i+1)
+		}
+	}
+
+	return result
+}
+
+func findContentChildren(g []int, s []int) int {
+	sort.Ints(g)
+	sort.Ints(s)
+
+	var result int
+	for _, gNum := range g {
+		for i, sNum := range s {
+			if gNum <= sNum {
+				result++
+				s = s[i+1:]
+				break
+			}
+
 		}
 	}
 
@@ -3015,5 +3032,5 @@ func main() {
 	//fmt.Println(canConstruct("a", "b"))
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
-	fmt.Println(findDisappearedNumbersV2([]int{4,3,2,7,8,2,3,1}))
+	fmt.Println(findContentChildren([]int{7, 8, 9, 10}, []int{5, 6, 7, 8}))
 }
