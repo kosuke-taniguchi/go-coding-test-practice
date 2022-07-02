@@ -3107,11 +3107,8 @@ func constructRectangleV2(area int) []int {
 	result := make([]int, 2)
 	for i := 1; i <= int(maxNum); i++ {
 		if area % i == 0 {
-			divided := area / i
-			if divided >= i {
-				result[0] = divided
-				result[1] = i
-			}
+			result[0] = area / i
+			result[1] = i
 		}
 	}
 
