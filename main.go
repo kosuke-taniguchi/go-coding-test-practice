@@ -3101,6 +3101,23 @@ func constructRectangle(area int) []int {
 	return result
 }
 
+// 最大が2乗付近だからSqrtを使う
+func constructRectangleV2(area int) []int {
+	maxNum := math.Sqrt(float64(area))
+	result := make([]int, 2)
+	for i := 1; i <= int(maxNum); i++ {
+		if area % i == 0 {
+			divided := area / i
+			if divided >= i {
+				result[0] = divided
+				result[1] = i
+			}
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3123,5 +3140,6 @@ func main() {
 	// fmt.Println(firstUniqChar("aabb"))
 	// fmt.Println([]rune("test"))
 	// fmt.Println(repeatedSubstringPattern("abaabaa"))
-	fmt.Println(constructRectangle(122122))
+	// fmt.Println(constructRectangle(122122))
+	fmt.Println(constructRectangleV2(122122))
 }
