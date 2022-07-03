@@ -2948,9 +2948,9 @@ func thirdMax(nums []int) int {
 }
 
 func arrangeCoins(n int) int {
-    count := n
+	count := n
 	i := 1
-	for count - i -1 > 0 {
+	for count-i-1 > 0 {
 		count = count - i - 1
 		i++
 	}
@@ -3013,36 +3013,36 @@ func findContentChildren(g []int, s []int) int {
 
 // これめっちゃ考えたけどわからなかった
 func repeatedSubstringPattern(s string) bool {
-    next := getNext(s)
-    n := next[len(s)]
-    m := len(s) - n
-    if n >= m && len(s) % m == 0 {
-        return true
-    }
-    return false
+	next := getNext(s)
+	n := next[len(s)]
+	m := len(s) - n
+	if n >= m && len(s)%m == 0 {
+		return true
+	}
+	return false
 }
 
 func getNext(s string) []int {
-    res := make([]int, len(s) + 1)
-    
-    i := 0
-    j := -1
-    res[0] = -1
-    
-    for i < len(s) {
-        if j == -1 || s[i] == s[j] {
-            i++
-            j++
-            res[i] = j
-        } else {
-            j = res[j]
-        }
-    }
-    return res
+	res := make([]int, len(s)+1)
+
+	i := 0
+	j := -1
+	res[0] = -1
+
+	for i < len(s) {
+		if j == -1 || s[i] == s[j] {
+			i++
+			j++
+			res[i] = j
+		} else {
+			j = res[j]
+		}
+	}
+	return res
 }
 
 func islandPerimeter(grid [][]int) int {
-    var result int
+	var result int
 	for i := 0; i < len(grid); i++ {
 		for j := 0; j < len(grid[i]); j++ {
 			if grid[i][j] == 1 {
@@ -3051,7 +3051,7 @@ func islandPerimeter(grid [][]int) int {
 					result -= 2
 				}
 				if j > 0 && grid[i][j-1] == 1 {
-					result -=2
+					result -= 2
 				}
 			}
 		}
@@ -3062,7 +3062,7 @@ func islandPerimeter(grid [][]int) int {
 
 func findMaxConsecutiveOnes(nums []int) int {
 	var max int
-    var count int
+	var count int
 	for _, num := range nums {
 		if num == 1 {
 			count++
@@ -3085,7 +3085,7 @@ func findMaxConsecutiveOnes(nums []int) int {
 func constructRectangle(area int) []int {
 	result := []int{area, 1}
 	for i := 1; i < area; i++ {
-		if area % i != 0 {
+		if area%i != 0 {
 			continue
 		}
 
@@ -3106,13 +3106,27 @@ func constructRectangleV2(area int) []int {
 	maxNum := math.Sqrt(float64(area))
 	result := make([]int, 2)
 	for i := 1; i <= int(maxNum); i++ {
-		if area % i == 0 {
+		if area%i == 0 {
 			result[0] = area / i
 			result[1] = i
 		}
 	}
 
 	return result
+}
+
+func findPoisonedDuration(timeSeries []int, duration int) int {
+	var count int
+	for i := 0; i < len(timeSeries) - 1; i++ {
+		plusedDuration := timeSeries[i] + duration
+		if plusedDuration > timeSeries[i+1] {
+			count += (timeSeries[i+1] - timeSeries[i])
+		} else {
+			count += duration
+			}
+	}
+
+	return count + duration
 }
 
 func main() {
@@ -3138,5 +3152,6 @@ func main() {
 	// fmt.Println([]rune("test"))
 	// fmt.Println(repeatedSubstringPattern("abaabaa"))
 	// fmt.Println(constructRectangle(122122))
-	fmt.Println(constructRectangleV2(122122))
+	// fmt.Println(constructRectangleV2(122122))
+	fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
 }
