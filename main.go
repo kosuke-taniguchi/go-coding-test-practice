@@ -3336,6 +3336,61 @@ func helperFindModeV2(root *TreeNode, result *[]int, count *int, max *int, prev 
 	helperFindModeV2(root.Right, result, count, max, &root.Val)
 }
 
+// 1, 2, 3位以降はスコアを表にするものかと思ってた。やりなおしはV2で
+func findRelativeRanks(scores []int) []string {
+    result := make([]string, 0, len(scores))
+	rankList := make([]int, len(scores))
+	
+	for i, score := range scores {
+		if i == 0 {
+			rankList[0] = score
+			continue
+		}
+
+		if score > rankList[0] {
+			rankList[1] = rankList[0]
+			rankList[0] = score
+		} else if score > rankList[1] {
+			rankList[2] = rankList[1]
+			rankList[1] = score
+		} else if score > rankList[2] {
+			rankList[2] = score
+		}
+	}
+
+	for _, score := range scores {
+		if score == rankList[0] {
+			result = append(result, "Gold Medal")
+		} else if score == rankList[1] {
+			result = append(result, "Silver Medal")
+		} else if score == rankList[2] {
+			result = append(result, "Bronze Medal")
+		} else {
+			result = append(result, strconv.Itoa(score))
+		}
+	}
+
+	return result
+}
+
+func findRelativeRanksV2(scores []int) []string {
+	result := make([]string, 0, len(scores))
+	sort.Ints(scores)
+	for i := len(scores) - 1; i >=0; i-- {
+		if i == len(scores) -1 {
+			result = append(result, "Gold Medal")
+		} else if i == len(scores) - 2 {
+			result = append(result, "Silver Medal")
+		} else if i == len(scores) - 3 {
+			result = append(result, "Bronze Medal")
+		} else {
+			result = append(result, strconv.Itoa(i))
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3364,4 +3419,5 @@ func main() {
 	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
+	fmt.Println(findRelativeRanks([]int{5, 4, 3, 2, 1}))
 }
