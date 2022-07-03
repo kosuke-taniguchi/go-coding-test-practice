@@ -3156,6 +3156,33 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+func nextGreaterElementV2(nums1 []int, nums2 []int) []int {
+	numsMap := make(map[int]int, 0)
+	result := make([]int, 0, len(nums2))
+	for i := 0; i < len(nums2); i++ {
+		numsMap[nums2[i]] = i
+	}
+
+	for i := 0; i < len(nums1); i++ {
+		idx := numsMap[nums1[i]]
+		var maxIdx int
+		for j := idx; j < len(nums2); j++ {
+			if nums1[i] < nums2[j] {
+				maxIdx = j
+				break
+			}
+		}
+		
+		if maxIdx > idx {
+			result = append(result, nums2[maxIdx])
+		} else {
+			result = append(result, -1)
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3181,5 +3208,6 @@ func main() {
 	// fmt.Println(constructRectangle(122122))
 	// fmt.Println(constructRectangleV2(122122))
 	// fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
-	fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
+	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
+	fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 }
