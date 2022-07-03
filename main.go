@@ -3183,6 +3183,29 @@ func nextGreaterElementV2(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+func nextGreaterElementV3(nums1 []int, nums2 []int) []int {
+	numsMap := make(map[int]int, 0)
+	result := make([]int, 0, len(nums2))
+	for i := 0; i < len(nums2); i++ {
+		numsMap[nums2[i]] = i
+	}
+
+	for i := 0; i < len(nums1); i++ {
+		idx := numsMap[nums1[i]]
+		for j := idx; j < len(nums2); j++ {
+			if nums1[i] < nums2[j] {
+				result = append(result, nums2[j])
+				break
+			}
+			if j == len(nums2) - 1 {
+				result = append(result, -1)
+			}
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
