@@ -3266,6 +3266,43 @@ func findWords(words []string) []string {
 	return result
 }
 
+// 考え方は惜しかった。けど間違ってる
+func findMode(root *TreeNode) []int {
+	var result []int
+	var count int
+	helperFindMode(root, &result, &count)
+	return result
+}
+
+func helperFindMode(root *TreeNode, result *[]int, count *int) {
+	if root == nil {
+		return
+	}
+
+	if root.Left != nil {
+		if root.Left.Val == root.Val {
+			*count++
+		} else {
+			*count = 0
+		}
+		if *count != 0 {
+			*result = append(*result, root.Val)
+		}
+		helperFindMode(root.Left, result, count)
+	}
+	if root.Right != nil {
+		if root.Right.Val == root.Val {
+			*count++
+		} else {
+			*count = 0
+		}
+		if *count != 0 {
+			*result = append(*result, root.Val)
+		}
+		helperFindMode(root.Right, result, count)
+	}
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3293,5 +3330,7 @@ func main() {
 	// fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
 	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
-	fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
+	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
+	var a *int
+	fmt.Println(*a)
 }
