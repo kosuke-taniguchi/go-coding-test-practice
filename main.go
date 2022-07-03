@@ -3156,6 +3156,7 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+// faster
 func nextGreaterElementV2(nums1 []int, nums2 []int) []int {
 	numsMap := make(map[int]int, 0)
 	result := make([]int, 0, len(nums2))
@@ -3183,6 +3184,7 @@ func nextGreaterElementV2(nums1 []int, nums2 []int) []int {
 	return result
 }
 
+// v2より読みやすく
 func nextGreaterElementV3(nums1 []int, nums2 []int) []int {
 	numsMap := make(map[int]int, 0)
 	result := make([]int, 0, len(nums2))
@@ -3200,6 +3202,64 @@ func nextGreaterElementV3(nums1 []int, nums2 []int) []int {
 			if j == len(nums2) - 1 {
 				result = append(result, -1)
 			}
+		}
+	}
+
+	return result
+}
+
+func findWords(words []string) []string {
+	result := make([]string, 0)
+	rowMap := map[string]int{
+		"a": 1,
+		"b": 2,
+		"c": 2,
+		"d": 1,
+		"e": 0,
+		"f": 1,
+		"g": 1,
+		"h": 1,
+		"i": 0,
+		"j": 1,
+		"k": 1,
+		"l": 1,
+		"m": 2,
+		"n": 2,
+		"o": 0,
+		"p": 0,
+		"q": 0,
+		"r": 0,
+		"s": 1,
+		"t": 0,
+		"u": 0,
+		"v": 2,
+		"w": 0,
+		"x": 2,
+		"y": 0,
+		"z": 2,
+	}
+
+	for _, word := range words {
+		row := -1
+		var isSameRow bool
+		for i, w := range word {
+			str := strings.ToLower(string(w))
+			if i == 0 {
+				row = rowMap[str]
+				isSameRow = true
+				continue
+			}
+
+			if rowMap[str] != row {
+				isSameRow = false
+				break
+			}
+
+			isSameRow = true
+		}
+
+		if isSameRow {
+			result = append(result, word)
 		}
 	}
 
@@ -3232,5 +3292,6 @@ func main() {
 	// fmt.Println(constructRectangleV2(122122))
 	// fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
 	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
-	fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
+	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
+	fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
 }
