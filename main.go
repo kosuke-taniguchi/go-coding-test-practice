@@ -3129,6 +3129,33 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 	return count + duration
 }
 
+// 遅い
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	result := make([]int, 0, len(nums1))
+    for i := 0; i < len(nums1); i++ {
+		var iIdx int
+		var exist bool
+		var greaterIdx int
+		for j := 0; j < len(nums2); j++ {
+			if nums1[i] == nums2[j] {
+				iIdx = j
+				exist = true
+			}
+			if nums1[i] < nums2[j] && exist {
+				greaterIdx = j
+				break
+			}
+		}
+		if iIdx < greaterIdx {
+			result = append(result, nums2[greaterIdx])
+		} else {
+			result = append(result, -1)
+		}
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3153,5 +3180,6 @@ func main() {
 	// fmt.Println(repeatedSubstringPattern("abaabaa"))
 	// fmt.Println(constructRectangle(122122))
 	// fmt.Println(constructRectangleV2(122122))
-	fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
+	// fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
+	fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 }
