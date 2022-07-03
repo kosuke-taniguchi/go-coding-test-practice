@@ -3303,6 +3303,39 @@ func helperFindMode(root *TreeNode, result *[]int, count *int) {
 	}
 }
 
+// ヒント見た後
+// これも惜しいけど不正解ぽい
+// わからなかった...
+func findModeV2(root *TreeNode) []int {
+	var count int
+	prev := 0
+	max := 1
+	result := make([]int, 0)
+	helperFindModeV2(root, &result, &count, &max, &prev)
+	return result
+}
+
+func helperFindModeV2(root *TreeNode, result *[]int, count *int, max *int, prev *int) {
+	if root == nil {
+		return
+	}
+
+	helperFindModeV2(root.Left, result, count, max, &root.Val)
+	if root.Val == *prev {
+		*count++
+	} else {
+		*count = 1
+	}
+
+	if *max < *count {
+		*max = *count
+		*result = []int{root.Val}
+	} else if *max == *count {
+		*result = append(*result, root.Val)
+	}
+	helperFindModeV2(root.Right, result, count, max, &root.Val)
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3331,6 +3364,4 @@ func main() {
 	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
-	var a *int
-	fmt.Println(*a)
 }
