@@ -6,6 +6,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 func InsertionSort(numbers []int) []int {
@@ -3398,6 +3399,32 @@ func findRelativeRanksV2(scores []int) []string {
 	return result
 }
 
+func detectCapitalUse(words string) bool {
+	if len(words) == 1 {
+		return true
+	}
+
+	result := true
+	var prevWord rune
+	for i, word := range words {
+		if i == 0 {
+			prevWord = word
+			continue
+		}
+
+		if (unicode.IsUpper(word) && unicode.IsLower(prevWord)) || (unicode.IsLower(word) && unicode.IsUpper(prevWord)) {
+			if i == 1 && unicode.IsUpper(prevWord) {
+				result = true
+			} else {
+				return false
+			}
+		}
+		prevWord = word
+	}
+
+	return result
+}
+
 func main() {
 	//fmt.Println(numbers)
 
@@ -3427,5 +3454,5 @@ func main() {
 	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
 	// fmt.Println(findRelativeRanks([]int{5, 4, 3, 2, 1}))
-	fmt.Println(findRelativeRanksV2([]int{5, 4, 3, 2, 1}))
+	fmt.Println(detectCapitalUse("DleDtco"))
 }
