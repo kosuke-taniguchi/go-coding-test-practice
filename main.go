@@ -3425,6 +3425,32 @@ func detectCapitalUse(words string) bool {
 	return result
 }
 
+func getMinimumDifference(root *TreeNode) int {
+	values := make([]int, 0)
+	getValuesForGetMinimumDifference(root, &values)
+
+	sort.Ints(values)
+
+	result := math.MaxInt
+	for i := 1; i < len(values); i++ {
+		twoDifference := values[i] - values[i-1]
+		if twoDifference < result {
+			result = twoDifference
+		}
+	}
+
+	return result
+}
+
+func getValuesForGetMinimumDifference(root *TreeNode, list *[]int) {
+	if root == nil {
+		return
+	}
+	getValuesForGetMinimumDifference(root.Right, list)
+	*list = append(*list, root.Val)
+	getValuesForGetMinimumDifference(root.Left, list)
+}
+
 func main() {
 	//fmt.Println(numbers)
 
