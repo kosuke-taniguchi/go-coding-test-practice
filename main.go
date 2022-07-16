@@ -3117,13 +3117,13 @@ func constructRectangleV2(area int) []int {
 
 func findPoisonedDuration(timeSeries []int, duration int) int {
 	var count int
-	for i := 0; i < len(timeSeries) - 1; i++ {
+	for i := 0; i < len(timeSeries)-1; i++ {
 		plusedDuration := timeSeries[i] + duration
 		if plusedDuration > timeSeries[i+1] {
 			count += (timeSeries[i+1] - timeSeries[i])
 		} else {
 			count += duration
-			}
+		}
 	}
 
 	return count + duration
@@ -3132,7 +3132,7 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 // 遅い
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	result := make([]int, 0, len(nums1))
-    for i := 0; i < len(nums1); i++ {
+	for i := 0; i < len(nums1); i++ {
 		var iIdx int
 		var exist bool
 		var greaterIdx int
@@ -3173,7 +3173,7 @@ func nextGreaterElementV2(nums1 []int, nums2 []int) []int {
 				break
 			}
 		}
-		
+
 		if maxIdx > idx {
 			result = append(result, nums2[maxIdx])
 		} else {
@@ -3199,7 +3199,7 @@ func nextGreaterElementV3(nums1 []int, nums2 []int) []int {
 				result = append(result, nums2[j])
 				break
 			}
-			if j == len(nums2) - 1 {
+			if j == len(nums2)-1 {
 				result = append(result, -1)
 			}
 		}
@@ -3338,9 +3338,9 @@ func helperFindModeV2(root *TreeNode, result *[]int, count *int, max *int, prev 
 
 // 1, 2, 3位以降はスコアを表にするものかと思ってた。やりなおしはV2で
 func findRelativeRanks(scores []int) []string {
-    result := make([]string, 0, len(scores))
+	result := make([]string, 0, len(scores))
 	rankList := make([]int, len(scores))
-	
+
 	for i, score := range scores {
 		if i == 0 {
 			rankList[0] = score
@@ -3374,18 +3374,25 @@ func findRelativeRanks(scores []int) []string {
 }
 
 func findRelativeRanksV2(scores []int) []string {
-	result := make([]string, 0, len(scores))
-	sort.Ints(scores)
-	for i := len(scores) - 1; i >=0; i-- {
-		if i == len(scores) -1 {
-			result = append(result, "Gold Medal")
-		} else if i == len(scores) - 2 {
-			result = append(result, "Silver Medal")
-		} else if i == len(scores) - 3 {
-			result = append(result, "Bronze Medal")
+	sortedScore := make([]int, len(scores))
+	_ = copy(sortedScore, scores)
+	sort.Ints(sortedScore)
+	resultMap := make(map[int]string, 0)
+	for i := len(sortedScore) - 1; i >= 0; i-- {
+		if i == len(sortedScore)-1 {
+			resultMap[sortedScore[i]] = "Gold Medal"
+		} else if i == len(sortedScore)-2 {
+			resultMap[sortedScore[i]] = "Silver Medal"
+		} else if i == len(sortedScore)-3 {
+			resultMap[sortedScore[i]] = "Bronze Medal"
 		} else {
-			result = append(result, strconv.Itoa(i))
+			resultMap[sortedScore[i]] = fmt.Sprintf("%d", len(sortedScore)-i)
 		}
+	}
+
+	result := make([]string, 0, len(scores))
+	for _, score := range scores {
+		result = append(result, resultMap[score])
 	}
 
 	return result
@@ -3419,5 +3426,6 @@ func main() {
 	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
 	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
-	fmt.Println(findRelativeRanks([]int{5, 4, 3, 2, 1}))
+	// fmt.Println(findRelativeRanks([]int{5, 4, 3, 2, 1}))
+	fmt.Println(findRelativeRanksV2([]int{5, 4, 3, 2, 1}))
 }
