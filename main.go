@@ -3473,34 +3473,32 @@ func helperForDiameterOfBT(root *TreeNode, diameter *float64) float64 {
 	return math.Max(left, right) + 1
 }
 
-func main() {
-	//fmt.Println(numbers)
+func checkRecord(s string) bool {
+	attendances := strings.Split(s, "")
+	var numOfLate int
+	var numOfAbsent int
+	for _, attendance := range attendances {
+		if attendance == "A" {
+			numOfAbsent++
+			numOfLate = 0
+			if numOfAbsent > 1 {
+				return false
+			}
+		} else if attendance == "L" {
+			numOfLate++
+			if numOfLate > 2 {
+				return false
+			}
+		} else {
+			numOfLate = 0
+		}
+	}
 
-	//fmt.Println(longestCommonPrefixV2([]string{"flight", "flow", "flower"}))
-	//fmt.Println(isHappy(4))
-	//fmt.Println(isIsomorphic("add", "bae"))
-	//fmt.Println(isPowerOfTwo(15))
-	//fmt.Println(isPowerOfTwoV2(16))
-	//fmt.Println(addDigits(38))
-	//fmt.Println(isUglyV2(8))
-	//moveZeroes([]int{0, 1, 0, 3, 12})
-	//moveZeroesV2([]int{0, 1, 0, 3, 12})
-	//fmt.Println(wordPattern("abba", "dog cat cat dog"))
-	//fmt.Println(countBits(5))
-	//fmt.Println(isPowerOfFour(20))
-	//fmt.Println(reverseVowels("leetcode"))
-	//fmt.Println(intersect([]int{1, 2, 3, 3, 4}, []int{1, 2, 3, 3, 3, 4}))
-	//fmt.Println(isPerfectSquare(16))
-	//fmt.Println(canConstruct("a", "b"))
-	// fmt.Println(firstUniqChar("aabb"))
-	// fmt.Println([]rune("test"))
-	// fmt.Println(repeatedSubstringPattern("abaabaa"))
-	// fmt.Println(constructRectangle(122122))
-	// fmt.Println(constructRectangleV2(122122))
-	// fmt.Println(findPoisonedDuration([]int{1, 2, 3, 4, 5}, 5))
-	// fmt.Println(nextGreaterElement([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
-	// fmt.Println(nextGreaterElementV2([]int{1, 3, 5, 2, 4}, []int{6, 5, 4, 3, 2, 1, 7}))
-	// fmt.Println(findWords([]string{"Hello","Alaska","Dad","Peace"}))
-	// fmt.Println(findRelativeRanks([]int{5, 4, 3, 2, 1}))
-	fmt.Println(detectCapitalUse("DleDtco"))
+	return true
+}
+
+func main() {
+	fmt.Println(checkRecord("PPALLP"))
+	fmt.Println(checkRecord("PPALLL"))
+	fmt.Println(checkRecord("LALL"))
 }
