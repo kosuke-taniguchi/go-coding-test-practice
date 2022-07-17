@@ -3497,8 +3497,25 @@ func checkRecord(s string) bool {
 	return true
 }
 
+// Correct but slowly.
+// Runtime: faster than abount 10%
+func reverseWords(s string) string {
+	splited := strings.Split(s, " ")
+	var result string
+	for _, word := range splited {
+		var reversed string
+		for i := len(word) - 1; i >= 0; i-- {
+			reversed += string(word[i])
+		}
+
+		result += reversed + " "
+	}
+
+	result = result[:len(result)-1]
+
+	return result
+}
+
 func main() {
-	fmt.Println(checkRecord("PPALLP"))
-	fmt.Println(checkRecord("PPALLL"))
-	fmt.Println(checkRecord("LALL"))
+	fmt.Println(reverseWords("I am Kosuke"))
 }
