@@ -3451,6 +3451,28 @@ func getValuesForGetMinimumDifference(root *TreeNode, list *[]int) {
 	getValuesForGetMinimumDifference(root.Left, list)
 }
 
+// ヒントあり. 相変わらずBinary Treeは苦手
+func diameterOfBinaryTree(root *TreeNode) int {
+	if root == nil {
+		return -1
+	}
+
+	var diameter float64
+	helperForDiameterOfBT(root, &diameter)
+	return int(diameter)
+}
+
+func helperForDiameterOfBT(root *TreeNode, diameter *float64) float64 {
+	if root == nil {
+		return 0
+	}
+
+	left := helperForDiameterOfBT(root.Left, diameter)
+	right := helperForDiameterOfBT(root.Right, diameter)
+	*diameter = math.Max(*diameter, left+right)
+	return math.Max(left, right) + 1
+}
+
 func main() {
 	//fmt.Println(numbers)
 
