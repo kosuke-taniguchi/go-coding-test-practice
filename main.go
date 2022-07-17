@@ -3516,6 +3516,27 @@ func reverseWords(s string) string {
 	return result
 }
 
+// a little bit faster
+func reverseWordsV2(s string) string {
+	splited := strings.Split(s, " ")
+	var result string
+	for _, word := range splited {
+		wordRune := []rune(word)
+		j := len(word) - 1
+		for i := 0; i < len(word)/2; i++ {
+			wordRune[i], wordRune[j] = wordRune[j], wordRune[i]
+			j--
+		}
+
+		result += string(wordRune) + " "
+	}
+
+	result = result[:len(result)-1]
+
+	return result
+}
+
 func main() {
 	fmt.Println(reverseWords("I am Kosuke"))
+	fmt.Println(reverseWordsV2("I am Kosuke"))
 }
