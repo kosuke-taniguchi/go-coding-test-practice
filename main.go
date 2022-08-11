@@ -3536,7 +3536,30 @@ func reverseWordsV2(s string) string {
 	return result
 }
 
+func arrayPairSum(nums []int) int {
+	sort.Ints(nums)
+	var result int
+	for i, num := range nums {
+		if i%2 == 0 {
+			result += num
+		}
+	}
+
+	return result
+}
+
+func arrayPairSumV2(nums []int) int {
+	sort.Ints(nums)
+	var result int
+	for i := 0; i < len(nums); i = i + 2 {
+		result += nums[i]
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(reverseWords("I am Kosuke"))
 	fmt.Println(reverseWordsV2("I am Kosuke"))
+	fmt.Println(arrayPairSum([]int{6, 2, 6, 5, 1, 2}))
+	fmt.Println(arrayPairSumV2([]int{6, 2, 6, 5, 1, 2}))
 }
